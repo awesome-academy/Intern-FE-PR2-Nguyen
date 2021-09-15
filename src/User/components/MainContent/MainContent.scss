@@ -1,0 +1,8 @@
+@import "/src/style/style.scss";
+
+.main-content {
+    @include paddingA(2rem);
+    float: right;
+    width: 100%;
+    background-color:#F7F7F7 ;
+}
