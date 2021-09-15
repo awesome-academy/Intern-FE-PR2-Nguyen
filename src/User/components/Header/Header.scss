@@ -4,6 +4,7 @@
     @include position(fixed, 0, 0, 0);
     @include paddingA(2rem);
     z-index: 10;
+    background-color: $color-white;
     &__link {
         text-align: right;
         .link__item {
@@ -27,5 +28,4 @@
             color: $color-white;
         }
     }
-    
 }

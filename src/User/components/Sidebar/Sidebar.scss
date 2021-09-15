@@ -1,0 +1,8 @@
+@import "/src/style/style.scss";
+
+.sidebar {
+    @include position(relative);
+    background-color: $color-white;
+    float: left;
+    z-index: 10;
+}
