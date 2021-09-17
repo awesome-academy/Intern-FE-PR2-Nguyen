@@ -19,6 +19,7 @@ function Sidebar() {
 
     for (let category of allProducts) {
       const { lvl0, lvl1 } = category.hierarchicalCategories;
+
       if (!allCategories[lvl0]) {
         allCategories[lvl0] = {
           name: lvl0,
@@ -57,6 +58,7 @@ function Sidebar() {
 
     let categoriesView = Object.keys(categories).map((product, key) => {
       const { name, children } = categories[product];
+
       return (
         <div className='sidebar__list' key={key}>
           <p

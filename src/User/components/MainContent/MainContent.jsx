@@ -1,19 +1,29 @@
-import { Row } from "antd";
+import { Row, Spin } from "antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import NotFound from "../../../assets/404.svg";
 import CardItem from "../Card/Card";
 import "./MainContent.scss";
 
 function MainContent() {
-  const showItem = () => {
-    const mapNumber = Array.from({ length: 12 }, (index, item) => item);
+  const dispatch = useDispatch();
 
-    return mapNumber.map((item) => {
-      return <CardItem key={item} />;
-    });
-  };
+  const { isLoading } = useSelector((state) => state.products);
+  const { filterProduct } = useSelector((state) => state.products);
+
   return (
     <div className='main-content'>
-      <Row gutter={[16, 16]}>{showItem()}</Row>
+      {isLoading ? (
+        <Spin />
+      ) : (
+        <Row gutter={[16, 16]}>
+          {filterProduct.length <= 0 ? (
+            <img src={NotFound} alt='not found' />
+          ) : (
+            <CardItem />
+          )}
+        </Row>
+      )}
     </div>
   );
 }

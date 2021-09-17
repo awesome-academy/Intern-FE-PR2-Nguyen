@@ -15,11 +15,13 @@
 
     &__item { 
         @include textStyle(0.9rem, $color-black, 500, none);
-        @include marginY(0.5rem)
+        @include marginY(0.5rem);
+        cursor: pointer;
     }
 
     &__text { 
         padding-left: 1rem;
+        cursor: pointer;
     }
 
     &__icon {
