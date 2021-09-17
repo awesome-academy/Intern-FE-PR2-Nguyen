@@ -21,7 +21,7 @@ const productReducer = (state = initialState, { type, payload }) => {
     case productType.GET_ALL_PRODUCTS_SUCCESS:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         allProducts: payload,
         totalProducts: payload.length,
         error: null,
@@ -46,7 +46,7 @@ const productReducer = (state = initialState, { type, payload }) => {
     case productType.GET_FILTER_PRODUCT_SUCCESS:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         filterProduct: payload,
         totalProducts: payload.length,
         error: null,
