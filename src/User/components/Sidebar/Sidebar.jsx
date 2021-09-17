@@ -1,48 +1,100 @@
-import { Menu } from "antd";
-import Sider from "antd/lib/layout/Sider";
-import SubMenu from "antd/lib/menu/SubMenu";
-import React from "react";
+import { DownOutlined, RightOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeFilterCategoryLv0,
+  changeFilterCategoryLv1,
+} from "../../../redux/actions/filter.action";
 import "./Sidebar.scss";
 
 function Sidebar() {
-  return (
-    <div className='sidebar'>
-      <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          width: "300px",
-        }}
-        width={330}>
-        <Menu
-          mode='inline'
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          style={{ height: "100%" }}>
-          <SubMenu key='sub1' title='subnav 1'>
-            <Menu.Item key='1'>option1</Menu.Item>
-            <Menu.Item key='2'>option2</Menu.Item>
-            <Menu.Item key='3'>option3</Menu.Item>
-            <Menu.Item key='4'>option4</Menu.Item>
-          </SubMenu>
+  const dispatch = useDispatch();
+  const [activeLvl0, setActiveLvl0] = useState(null);
+  const [activeLvl1, setActiveLvl1] = useState(null);
 
-          <SubMenu key='sub2' title='subnav 2'>
-            <Menu.Item key='5'>option5</Menu.Item>
-            <Menu.Item key='6'>option6</Menu.Item>
-            <Menu.Item key='7'>option7</Menu.Item>
-            <Menu.Item key='8'>option8</Menu.Item>
-          </SubMenu>
+  const { allProducts } = useSelector((state) => state.products);
 
-          <SubMenu key='sub3' title='subnav 3'>
-            <Menu.Item key='9'>option9</Menu.Item>
-            <Menu.Item key='10'>option10</Menu.Item>
-            <Menu.Item key='11'>option11</Menu.Item>
-            <Menu.Item key='12'>option12</Menu.Item>
-          </SubMenu>
-        </Menu>
-      </Sider>
-    </div>
-  );
+  const getCategories = () => {
+    let allCategories = {};
+
+    for (let category of allProducts) {
+      const { lvl0, lvl1 } = category.hierarchicalCategories;
+      if (!allCategories[lvl0]) {
+        allCategories[lvl0] = {
+          name: lvl0,
+          children: {},
+        };
+      }
+
+      if (!lvl1) continue;
+
+      let categoryLvl1 = lvl1.split("> ")[1];
+
+      allCategories[lvl0].children[categoryLvl1] = categoryLvl1;
+    }
+
+    return allCategories;
+  };
+
+  const handleGetCategoryLvl0 = (categoryName, e) => {
+    e.preventDefault();
+    setActiveLvl0(categoryName);
+    setActiveLvl1(null);
+    dispatch(changeFilterCategoryLv0(categoryName));
+  };
+
+  const handleGetCategoryLvl1 = (categoryNameLvl0, categoryNameLvl1, e) => {
+    e.preventDefault();
+    setActiveLvl0(categoryNameLvl0);
+    setActiveLvl1(categoryNameLvl1);
+    dispatch(
+      changeFilterCategoryLv1(`${categoryNameLvl0} > ${categoryNameLvl1}`)
+    );
+  };
+
+  const showCategory = () => {
+    let categories = getCategories();
+
+    let categoriesView = Object.keys(categories).map((product, key) => {
+      const { name, children } = categories[product];
+      return (
+        <div className='sidebar__list' key={key}>
+          <p
+            className={`sidebar__item  ${name === activeLvl0 ? "active" : ""}`}
+            onClick={(e) => handleGetCategoryLvl0(name, e)}>
+            {name}
+          </p>
+
+          <span className='sidebar__icon'>
+            {name === activeLvl0 ? <DownOutlined /> : <RightOutlined />}
+          </span>
+
+          {Object.keys(children).length > 0 && (
+            <div className='sidebar__sub'>
+              {Object.keys(children).map((item, key) => {
+                return (
+                  <div
+                    className={`sidebar__text ${
+                      children[item] === activeLvl1 ? "sub--active" : ""
+                    }`}
+                    onClick={(e) =>
+                      handleGetCategoryLvl1(name, children[item], e)
+                    }
+                    key={key}>
+                    <span>{children[item]}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      );
+    });
+
+    return categoriesView;
+  };
+
+  return <div className='sidebar'>{showCategory()}</div>;
 }
 
 export default Sidebar;

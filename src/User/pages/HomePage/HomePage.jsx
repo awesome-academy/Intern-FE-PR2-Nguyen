@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProducts,
+  getProductFilter,
+} from "../../../redux/thunk/product.thunk";
 import Banner from "../../components/Banner/Banner";
 import Carousel from "../../components/Carousel/Carousel";
 import Header from "../../components/Header/Header";
@@ -7,6 +12,18 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import "./HomePage.scss";
 
 function HomePage() {
+  const dispatch = useDispatch();
+
+  const filter = useSelector((state) => state.filters);
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getProductFilter(filter));
+  }, [filter]);
+
   return (
     <div className='homePage'>
       <Header />
