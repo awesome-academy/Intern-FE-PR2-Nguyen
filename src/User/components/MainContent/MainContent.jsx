@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NotFound from "../../../assets/404.svg";
 import CardItem from "../Card/Card";
+import PaginationPage from "../Pagination/Pagination";
 import "./MainContent.scss";
 
 function MainContent() {
@@ -24,6 +25,8 @@ function MainContent() {
           )}
         </Row>
       )}
+
+      <PaginationPage />
     </div>
   );
 }
