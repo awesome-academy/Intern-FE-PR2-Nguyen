@@ -19,7 +19,7 @@ function MainContent() {
       ) : (
         <Row gutter={[16, 16]}>
           {filterProduct.length <= 0 ? (
-            <img src={NotFound} alt='not found' />
+            <img className='main-notfound' src={NotFound} alt='not found' />
           ) : (
             <CardItem />
           )}

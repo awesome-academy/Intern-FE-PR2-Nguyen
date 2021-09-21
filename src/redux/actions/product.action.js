@@ -1,4 +1,4 @@
-import { productType } from "../actionType/actionTypes";
+import { productDetail, productType } from "../actionType/actionTypes";
 
 export const getAllProductStart = () => ({
   type: productType.GET_ALL_PRODUCTS_START,
@@ -25,5 +25,19 @@ export const getFilterProductsSuccess = (products) => ({
 
 export const getFilterProductsError = (error) => ({
   type: productType.GET_FILTER_PRODUCT_ERROR,
+  payload: error,
+});
+
+export const getProductDetailStart = () => ({
+  type: productDetail.GET_PRODUCT_DETAILS_START,
+});
+
+export const getProductDetailSuccess = (product) => ({
+  type: productDetail.GET_PRODUCT_DETAILS_SUCCESS,
+  payload: product,
+});
+
+export const getProductDetailError = (error) => ({
+  type: productDetail.GET_PRODUCT_DETAILS_ERROR,
   payload: error,
 });

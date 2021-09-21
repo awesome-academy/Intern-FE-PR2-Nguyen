@@ -18,3 +18,12 @@ export const getProductFilter = (payload) => (dispatch) => {
     .then((product) => dispatch(actions.getFilterProductsSuccess(product)))
     .catch((err) => dispatch(actions.getFilterProductsError(err)));
 };
+
+export const getProductById = (payload) => (dispatch) => {
+  dispatch(actions.getProductDetailStart());
+
+  productsApi
+    .getProductById(payload)
+    .then((product) => dispatch(actions.getProductDetailSuccess(product)))
+    .catch((err) => dispatch(actions.getProductDetailError(err)));
+};

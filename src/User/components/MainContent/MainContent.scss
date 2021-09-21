@@ -1,8 +1,13 @@
-@import "/src/style/style.scss";
+@import '/src/style/style.scss';
 
 .main-content {
+    position: relative;
     @include paddingA(2rem);
-    float: right;
     width: 100%;
     height: 100vh;
+    background-color:#F7F7F7 ;
+
+    .main-notfound {
+        margin: 0 auto;
+    }
 }
