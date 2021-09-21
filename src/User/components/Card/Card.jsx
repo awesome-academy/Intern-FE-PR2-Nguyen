@@ -11,12 +11,24 @@ function CardItem() {
 
   return filterProduct.map((product, key) => {
     return (
-      <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 4 }} key={key}>
+      <Col
+        xs={{ span: 24 }}
+        md={{ span: 12 }}
+        lg={{ span: 4 }}
+        key={key}
+        id={product.id}>
         <Card
           className='card'
           cover={<img src={product.image} alt='product' />}
-          actions={[`$${product.price}`, <ShoppingCartOutlined />]}>
-          <Meta title={product.name} description={`${product.weight}lb`} />
+          actions={[
+            `$${product.price}`,
+            <ShoppingCartOutlined onClick={() => console.log(product.price)} />,
+          ]}>
+          <Meta
+            title={product.name}
+            description={`${product.weight}lb`}
+            onClick={(e) => console.log(product.id)}
+          />
         </Card>
       </Col>
     );
