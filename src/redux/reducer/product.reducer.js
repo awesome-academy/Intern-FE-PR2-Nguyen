@@ -1,8 +1,9 @@
-import { productType } from "../actionType/actionTypes";
+import { productDetail, productType } from "../actionType/actionTypes";
 
 const initialState = {
   allProducts: [],
   filterProduct: [],
+  product: {},
   isLoading: false,
   totalProducts: 0,
   error: null,
@@ -48,7 +49,6 @@ const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         filterProduct: payload,
-        totalProducts: payload.length,
         error: null,
       };
 
@@ -57,6 +57,28 @@ const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         totalProducts: 0,
+        error: payload,
+      };
+
+    case productDetail.GET_PRODUCT_DETAILS_START:
+      return {
+        ...state,
+        isLoading: false,
+        product: {},
+      };
+
+    case productDetail.GET_PRODUCT_DETAILS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        product: payload,
+      };
+
+    case productDetail.GET_PRODUCT_DETAILS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        product: {},
         error: payload,
       };
 
