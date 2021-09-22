@@ -6,6 +6,7 @@ import {
 } from "../../../redux/thunk/product.thunk";
 import Banner from "../../components/Banner/Banner";
 import Carousel from "../../components/Carousel/Carousel";
+import Cart from "../../components/Cart/Cart";
 import Header from "../../components/Header/Header";
 import MainContent from "../../components/MainContent/MainContent";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -33,6 +34,7 @@ function HomePage() {
         <Sidebar />
         <MainContent />
       </div>
+      <Cart />
     </div>
   );
 }

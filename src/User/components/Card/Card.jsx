@@ -1,8 +1,9 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Card, Col, Modal } from "antd";
+import { Card, Col } from "antd";
 import Meta from "antd/lib/card/Meta";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../../redux/actions/cart.action";
 import { getProductById } from "../../../redux/thunk/product.thunk";
 import ModalItem from "../ModalItem/ModalItem";
 import "./Card.scss";
@@ -15,6 +16,10 @@ function CardItem() {
 
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState("");
+
+  const handleAddToCart = (products) => {
+    dispatch(addToCart(products));
+  };
 
   useEffect(() => dispatch(getProductById(id)), [id]);
 
@@ -40,9 +45,7 @@ function CardItem() {
           }
           actions={[
             `$${products.price}`,
-            <ShoppingCartOutlined
-              onClick={() => console.log(products.price)}
-            />,
+            <ShoppingCartOutlined onClick={() => handleAddToCart(products)} />,
           ]}>
           <Meta title={products.name} description={`${products.weight}lb`} />
         </Card>
@@ -51,6 +54,7 @@ function CardItem() {
             visible={visible}
             setVisible={setVisible}
             product={product}
+            handleAddToCart={handleAddToCart}
           />
         )}
       </Col>
