@@ -1,6 +1,7 @@
 @import "/src/style/style.scss";
 
 .modal {
+    
     .ant-modal-content {
         box-shadow: none;
     }
@@ -27,7 +28,7 @@
     }
 
     &-weight {
-        @include textStyle(0.8rem, $color-gray, 400, none);
+        @include textStyle(0.8rem, $color-sub, 400, none);
     }
 
     &-description {
@@ -80,7 +81,9 @@
     }
 
     .dot-image {
+        width: 100%;
         margin: 0 auto;
+        object-fit: contain;
     }
 
     .slick-arrow {

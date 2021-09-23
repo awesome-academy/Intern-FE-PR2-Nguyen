@@ -1,9 +1,9 @@
 import Slider from "@ant-design/react-slick";
-import { Button, Modal, Space, Tag } from "antd";
+import { Button, Modal, Tag } from "antd";
 import React from "react";
 import "./ModalItem.scss";
 
-function ModalItem({ visible, setVisible, product }) {
+function ModalItem({ visible, setVisible, product, handleAddToCart }) {
   const dotData = [
     {
       img: product.image,
@@ -37,7 +37,7 @@ function ModalItem({ visible, setVisible, product }) {
   const showSlide = () => {
     return dotData.map((item, key) => {
       return (
-        <div key={key}>
+        <div key={key} className='slide-image'>
           <img className='dot-image' src={item.img} alt='dot-images' />
         </div>
       );
@@ -72,7 +72,11 @@ function ModalItem({ visible, setVisible, product }) {
 
             <div className='modal-cart'>
               <p className='modal-price'>${product.price}</p>
-              <Button className='modal-button' shape='round' size='medium'>
+              <Button
+                className='modal-button'
+                shape='round'
+                size='medium'
+                onClick={() => handleAddToCart(product)}>
                 Cart
               </Button>
             </div>
