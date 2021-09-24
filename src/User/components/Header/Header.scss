@@ -1,15 +1,19 @@
 @import "/src/style/style.scss";
 
 .header {
+    
     @include position(fixed, 0, 0, 0);
     @include paddingA(2rem);
     z-index: 10;
     background-color: $color-white;
+
     &__link {
         text-align: right;
+
         .link__item {
             @include textStyle(1rem, $color-black, 500, none);
             @include marginX(1.5rem);
+
             &:hover {
                 color: $color-green;
             }
@@ -17,6 +21,7 @@
     }
 
     &__button {
+
         @include textStyle(1rem, $color-white, 500, none);
         @include paddingY(0.5rem);
         @include paddingX(0.9rem);
@@ -28,4 +33,5 @@
             color: $color-white;
         }
     }
+    
 }

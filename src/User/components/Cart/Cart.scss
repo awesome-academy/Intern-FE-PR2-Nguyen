@@ -47,6 +47,15 @@
         cursor: pointer;
     }
 
+    &-found {
+        text-align: center;
+
+        h3 {
+            @include textStyle(0.9rem, $color-sub, 700, none);
+            padding-top:2rem;
+        }
+    }
+
     &-footer {
         .footer-button {
             display: flex;

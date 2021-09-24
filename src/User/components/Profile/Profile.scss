@@ -1,0 +1,12 @@
+@import '/src/style/style.scss';
+
+.profile {
+    
+    &-row {
+        @include marginY(2rem);
+    }
+
+    &-position {
+        @include textStyle(1.3rem, $color-black, 700, none);
+    }
+}
