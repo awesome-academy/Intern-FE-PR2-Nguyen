@@ -1,11 +1,12 @@
 import { CloseOutlined, ShoppingFilled } from "@ant-design/icons";
-import { Button, Drawer, InputNumber } from "antd";
+import { Button, Drawer, InputNumber, Space } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeQuantityCart,
   removeFromCart,
 } from "../../../redux/actions/cart.action";
+import CartFound from "../../../../src/assets/cart-found.png";
 import "./Cart.scss";
 
 function Cart() {
@@ -76,22 +77,35 @@ function Cart() {
 
         <p className='cart-price'>${totalPrice.toFixed(2)}</p>
       </div>
-      <Drawer
-        title={`${totalCart} Items`}
-        placement='right'
-        width={520}
-        onClose={() => setVisible(false)}
-        visible={visible}
-        footer={
-          <div className='cart-footer'>
-            <Button className='footer-button' size='large' shape='round'>
-              <p className='footer-name'>Checkout</p>
-              <p className='footer-price'>${totalPrice}</p>
-            </Button>
-          </div>
-        }>
-        {showItemCart(cart)}
-      </Drawer>
+      <Space>
+        <Drawer
+          title={`${totalCart} Items`}
+          placement='right'
+          width={520}
+          onClose={() => setVisible(false)}
+          visible={visible}
+          footer={
+            <div className='cart-footer'>
+              <Button
+                className='footer-button'
+                size='large'
+                shape='round'
+                disabled={totalCart >= 1 ? false : true}>
+                <p className='footer-name'>Checkout</p>
+                <p className='footer-price'>${totalPrice}</p>
+              </Button>
+            </div>
+          }>
+          {totalCart < 1 ? (
+            <div className='cart-found'>
+              <img src={CartFound} alt='cart found' />
+              <h3>No products found</h3>
+            </div>
+          ) : (
+            showItemCart(cart)
+          )}
+        </Drawer>
+      </Space>
     </div>
   );
 }
