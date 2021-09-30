@@ -1,9 +1,11 @@
 import { authTypes } from "../actionType/actionTypes";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 const initialState = {
-  profile: {},
-  isAuthenticated: false,
-  isLoggedIn: false,
+  profile: user || {},
+  isAuthenticated: (user && user.isAdmin ? true : false) || false,
+  isLoggedIn: user ? true : false,
   isLoading: false,
   status: "",
 };
@@ -25,6 +27,8 @@ const authReducer = (state = initialState, { type, payload }) => {
       const accessToken = payload.accessToken;
 
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("user", JSON.stringify(profile));
+
       state = {
         profile: profile,
         isAuthenticated: profile.isAdmin,
@@ -32,6 +36,7 @@ const authReducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         status: "Login_Success",
       };
+
       return { ...state };
     }
 
@@ -55,6 +60,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 
     case authTypes.GET_CUSTOMER_PROFILE_SUCCESS: {
       const profile = payload.profile;
+
       return {
         ...state,
         profile: profile,
@@ -74,6 +80,9 @@ const authReducer = (state = initialState, { type, payload }) => {
 
     case authTypes.CUSTOMER_LOGOUT: {
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      localStorage.removeItem("wishlist");
+
       return {
         ...initialState,
       };

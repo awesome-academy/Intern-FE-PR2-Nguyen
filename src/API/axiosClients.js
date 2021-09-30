@@ -17,7 +17,14 @@ axiosClient.interceptors.request.use(async (config) => {
 
 axiosClient.interceptors.response.use(
   (response) => {
-    if (response && response.data) {
+    if (response && response.data && response.config.method === "get") {
+      const total = Number(response.headers["x-total-count"]);
+      return {
+        total: total,
+        data: response.data,
+      };
+    }
+    if (response && response.data && response.config.method === "post") {
       return response.data;
     }
     return response;
