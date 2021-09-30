@@ -25,6 +25,27 @@ const cartReducer = (state = initialState, { type, payload }) => {
       };
     }
 
+    case cartType.ADD_CART_WITH_QUANTITY: {
+      const { product, quantity } = payload;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const indexProduct = cart.findIndex((cart) => cart.id === product.id);
+
+      if (indexProduct !== -1) {
+        cart[indexProduct].quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity: quantity });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      return {
+        totalCart: cart.length,
+        cart: cart,
+      };
+    }
+
     case cartType.CHANGE_QUANTITY_CART: {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
 

@@ -18,9 +18,9 @@ export const getFilterProductsStart = () => ({
   type: productType.GET_FILTER_PRODUCT_START,
 });
 
-export const getFilterProductsSuccess = (products) => ({
+export const getFilterProductsSuccess = (allProducts) => ({
   type: productType.GET_FILTER_PRODUCT_SUCCESS,
-  payload: products,
+  payload: allProducts,
 });
 
 export const getFilterProductsError = (error) => ({
@@ -40,4 +40,37 @@ export const getProductDetailSuccess = (product) => ({
 export const getProductDetailError = (error) => ({
   type: productDetail.GET_PRODUCT_DETAILS_ERROR,
   payload: error,
+});
+
+export const createProductStart = () => ({
+  type: productType.CREATE_PRODUCT_START,
+});
+
+export const createProductSuccess = (payload) => ({
+  type: productType.CREATE_PRODUCT_SUCCESS,
+  payload: payload,
+});
+
+export const createProductFailure = (payload) => ({
+  type: productType.CREATE_PRODUCT_FAILURE,
+  payload: payload,
+});
+
+export const updateProductStart = () => ({
+  type: productType.UPDATE_PRODUCT_START,
+});
+
+export const updateProductSuccess = (payload) => ({
+  type: productType.UPDATE_PRODUCT_SUCCESS,
+  payload: payload,
+});
+
+export const updateProductError = (payload) => ({
+  type: productType.UPDATE_PRODUCT_ERROR,
+  payload: payload,
+});
+
+export const deleteProductById = (payload) => ({
+  type: productType.DELETE_PRODUCT_BY_ID,
+  payload: payload,
 });

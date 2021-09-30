@@ -1,5 +1,7 @@
+import { ShopOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import React from "react";
-import SearchInput from "../Search/Search";
+import { Link } from "react-router-dom";
 import "./Banner.scss";
 
 function Banner() {
@@ -14,8 +16,13 @@ function Banner() {
           </p>
         </div>
 
-        <div className='banner__search'>
-          <SearchInput />
+        <div className='banner__button'>
+          <Link to='/products'>
+            <Button size='large'>
+              {" "}
+              <ShopOutlined /> Shop Now
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
