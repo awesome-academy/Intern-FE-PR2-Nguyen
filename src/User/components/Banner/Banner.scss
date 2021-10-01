@@ -1,7 +1,7 @@
 @import "/src/style/style.scss";
 
 .banner {
-    @include position(relative)
+    @include position(relative);
     height: 100vh;
     background: url("../../../assets/banner-voucher/bg-container.png");
     background-size: cover;
@@ -23,5 +23,23 @@
 
     &__sub {
         @include textStyle(1rem, $color-sub, 400, none);
+    }
+
+    &__button {
+        text-align: center;
+
+        button {
+            @include paddingX(2rem);
+            @include textStyle(1rem, $color-white, 500, none);
+            background-color: $color-green;
+            height: 3rem;
+            border-radius: 1rem;
+
+            &:hover {
+                color: $color-white;
+                background-color: $color-green;
+                border: none;
+            }
+        }
     }
 }

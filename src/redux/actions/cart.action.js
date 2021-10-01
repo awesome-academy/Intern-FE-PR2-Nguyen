@@ -10,6 +10,11 @@ export const removeFromCart = (payload) => ({
   payload: payload,
 });
 
+export const addCartWithQuantity = (payload) => ({
+  type: cartType.ADD_CART_WITH_QUANTITY,
+  payload: payload,
+});
+
 export const changeQuantityCart = (payload) => ({
   type: cartType.CHANGE_QUANTITY_CART,
   payload: payload,

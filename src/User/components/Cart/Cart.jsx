@@ -1,17 +1,20 @@
 import { CloseOutlined, ShoppingFilled } from "@ant-design/icons";
-import { Button, Drawer, InputNumber, Space } from "antd";
+import { Button, Drawer, InputNumber, message, Space } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import CartFound from "../../../../src/assets/cart-found.png";
 import {
   changeQuantityCart,
   removeFromCart,
 } from "../../../redux/actions/cart.action";
-import CartFound from "../../../../src/assets/cart-found.png";
 import "./Cart.scss";
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalCart, cart } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const history = useHistory();
 
   const [visible, setVisible] = useState(false);
 
@@ -21,6 +24,14 @@ function Cart() {
 
   const removeProduct = (product) => {
     dispatch(removeFromCart(product));
+  };
+
+  const handleRedirectCheckout = () => {
+    if (isLoggedIn && totalCart > 0) {
+      history.push("/checkout");
+    } else {
+      message.error("Please Login & Check cart");
+    }
   };
 
   const showItemCart = (carts) => {
@@ -90,9 +101,9 @@ function Cart() {
                 className='footer-button'
                 size='large'
                 shape='round'
-                disabled={totalCart >= 1 ? false : true}>
+                onClick={handleRedirectCheckout}>
                 <p className='footer-name'>Checkout</p>
-                <p className='footer-price'>${totalPrice}</p>
+                <p className='footer-price'>${totalPrice.toFixed(2)}</p>
               </Button>
             </div>
           }>
@@ -109,4 +120,5 @@ function Cart() {
     </div>
   );
 }
+
 export default Cart;
