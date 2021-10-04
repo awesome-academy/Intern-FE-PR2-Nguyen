@@ -10,10 +10,24 @@ export const createCustomers = (customer) => (dispatch) => {
     .catch((err) => dispatch(actions.createCustomerFailure()));
 };
 
-export const updateCustomers = (payload) => (dispatch) => {
-  dispatch(actions.updateCustomer());
+export const updateCustomers =
+  ({ id, customer }) =>
+  (dispatch) => {
+    dispatch(actions.updateCustomer());
+
+    customerApi
+      .updateCustomer(id, customer)
+      .then((payload) => {
+        dispatch(actions.updateCustomerSuccess(payload));
+      })
+      .catch((err) => dispatch(actions.updateCustomerFailure()));
+  };
+
+export const getCustomers = () => (dispatch) => {
+  dispatch(actions.getCustomersStart());
+
   customerApi
-    .updateCustomer(payload)
-    .then((payload) => dispatch(actions.updateCustomerSuccess(payload)))
-    .catch((err) => dispatch(actions.updateCustomerFailure()));
+    .getAllCustomer()
+    .then((customers) => dispatch(actions.getCustomersSuccess(customers)))
+    .catch((err) => dispatch(actions.getCustomersError(err)));
 };

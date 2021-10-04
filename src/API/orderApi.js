@@ -1,15 +1,20 @@
-import axiosClient from "./axiosClient";
+import axiosClient from "./axiosClients";
 
 const orderApi = {
   getOrderByUser: (id) => {
     const url = `/orders`;
     return axiosClient.get(url, {
       params: {
-        id: id,
+        idUser: id,
         _sort: "createAt",
         _order: "desc",
       },
     });
+  },
+
+  getAllOrder: () => {
+    const url = `/orders`;
+    return axiosClient.get(url);
   },
 
   createOrder: (order) => {

@@ -30,7 +30,7 @@ const customerApi = {
 
   updateCustomer: (id, customer) => {
     const url = `/users/${id}`;
-    return axiosClient.put(url, customer);
+    return axiosClient.patch(url, { ...customer });
   },
 };
 
