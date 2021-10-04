@@ -3,6 +3,8 @@ import { customerType } from "../actionType/actionTypes";
 const initialState = {
   isLoading: false,
   status: "",
+  users: {},
+  user: [],
 };
 
 const customerReducer = (state = initialState, { type, payload }) => {
@@ -19,7 +21,7 @@ const customerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        status: "Register Success",
+        status: "Register_Success",
       };
     }
 
@@ -27,7 +29,7 @@ const customerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        status: "Register Failure",
+        status: "Register_Failure",
       };
     }
 
@@ -43,7 +45,7 @@ const customerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        status: "Update Success",
+        status: "Update_Success",
       };
     }
 
@@ -51,7 +53,30 @@ const customerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        status: "Update Failure",
+        status: "Update_Failure",
+      };
+    }
+
+    case customerType.GET_ALL_CUSTOMER_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case customerType.GET_ALL_CUSTOMER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        users: payload.data,
+      };
+    }
+
+    case customerType.GET_ALL_CUSTOMER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        users: {},
       };
     }
 

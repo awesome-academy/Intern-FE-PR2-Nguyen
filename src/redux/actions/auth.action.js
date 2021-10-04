@@ -29,3 +29,8 @@ export const getProfileSuccess = (payload) => ({
 export const getProfileFailure = () => ({
   type: authTypes.GET_CUSTOMER_PROFILE_FAILURE,
 });
+
+export const getProfileByToken = (payload) => ({
+  type: authTypes.GET_CUSTOMER_PROFILE_SUCCESS,
+  payload: payload,
+});
