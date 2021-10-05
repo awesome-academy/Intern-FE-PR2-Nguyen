@@ -19,3 +19,8 @@ export const changeFilterPagination = (page) => ({
   type: filterType.CHANGE_FILTER_PAGINATION,
   payload: page,
 });
+
+export const changeFilterByPrice = (price) => ({
+  type: filterType.CHANGE_FILTER_PRICE,
+  payload: price,
+});
