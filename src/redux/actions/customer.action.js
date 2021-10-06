@@ -1,5 +1,19 @@
 import { customerType } from "../actionType/actionTypes";
 
+export const getCustomersStart = () => ({
+  type: customerType.GET_ALL_CUSTOMER_START,
+});
+
+export const getCustomersSuccess = (payload) => ({
+  type: customerType.GET_ALL_CUSTOMER_SUCCESS,
+  payload: payload,
+});
+
+export const getCustomersError = (payload) => ({
+  type: customerType.GET_ALL_CUSTOMER_ERROR,
+  payload: payload,
+});
+
 export const createCustomer = () => ({
   type: customerType.CREAT_CUSTOMER_START,
 });
@@ -14,14 +28,14 @@ export const createCustomerFailure = () => ({
 });
 
 export const updateCustomer = () => ({
-  type: customerType.CREAT_CUSTOMER_START,
+  type: customerType.UPDATE_CUSTOMER_START,
 });
 
 export const updateCustomerSuccess = (customer) => ({
-  type: customerType.CREAT_CUSTOMER_SUCCESS,
+  type: customerType.UPDATE_CUSTOMER_SUCCESS,
   payload: customer,
 });
 
 export const updateCustomerFailure = () => ({
-  type: customerType.CREAT_CUSTOMER_FAILURE,
+  type: customerType.UPDATE_CUSTOMER_FAILURE,
 });
