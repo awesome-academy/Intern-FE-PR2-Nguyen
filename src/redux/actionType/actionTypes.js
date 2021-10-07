@@ -93,6 +93,6 @@ export const commentType = {
 };
 
 export const wishlistType = {
-  GET_WISHLIST: "GET_WISHLIST",
   REMOVE_WISHLIST: "REMOVE_WISHLIST",
+  ADD_WISHLIST: "ADD_WISHLIST",
 };

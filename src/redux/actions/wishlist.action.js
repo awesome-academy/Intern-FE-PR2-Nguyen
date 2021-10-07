@@ -1,11 +1,11 @@
 import { wishlistType } from "../actionType/actionTypes";
 
-export const getWishListSuccess = (payload) => ({
-  type: wishlistType.GET_WISHLIST,
+export const removeWishListSuccess = (payload) => ({
+  type: wishlistType.REMOVE_WISHLIST,
   payload: payload,
 });
 
-export const removeWishListSuccess = (payload) => ({
-  type: wishlistType.REMOVE_WISHLIST,
+export const addWishlist = (payload) => ({
+  type: wishlistType.ADD_WISHLIST,
   payload: payload,
 });

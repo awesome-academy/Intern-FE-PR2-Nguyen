@@ -1,9 +1,12 @@
 import { combineReducers } from "redux";
-import filterReducer from "./filter.reducer";
-import productReducer from "./product.reducer";
-import cartReducer from "./cart.reducer";
-import customerReducer from "./customer.reducer";
 import authReducer from "./auth.reducer";
+import cartReducer from "./cart.reducer";
+import commentReducer from "./comment.reducer";
+import customerReducer from "./customer.reducer";
+import filterReducer from "./filter.reducer";
+import orderReducer from "./order.reducer";
+import productReducer from "./product.reducer";
+import wishlistReducer from "./wishlist.reducer";
 
 const rootReducer = () =>
   combineReducers({
@@ -12,6 +15,9 @@ const rootReducer = () =>
     cart: cartReducer,
     customer: customerReducer,
     auth: authReducer,
+    order: orderReducer,
+    comment: commentReducer,
+    wishlist: wishlistReducer,
   });
 
 export default rootReducer;
